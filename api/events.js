@@ -5,15 +5,14 @@
 // Deploy: put this whole folder on Vercel (or adapt for your host). The function will
 // be available at /api/events. Then set LIVE_ENDPOINT = "/api/events" in index.html.
 
-const { parseWeekender } = require('../lib/parse');
+const { parseWeekender, fetchWeekenderHtml } = require('../lib/parse');
 
 const SOURCE = 'https://www.parentmap.com/things-to-do/the-weekender/';
 
 module.exports = async (req, res) => {
   try {
-    const r = await fetch(SOURCE, { headers: { 'User-Agent': 'WeekenderMap/1.0 (+personal use)' } });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const html = await r.text();
+    const html = await fetchWeekenderHtml(SOURCE);
+    if (!html) throw new Error('Unable to retrieve ParentMap Weekender page');
     const events = parseWeekender(html, SOURCE);
     if (!events.length) throw new Error('No events parsed');
 

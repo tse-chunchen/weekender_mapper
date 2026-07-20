@@ -5,14 +5,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const { parseWeekender } = require('./lib/parse');
+const { parseWeekender, fetchWeekenderHtml } = require('./lib/parse');
 
 const SOURCE = 'https://www.parentmap.com/things-to-do/the-weekender/';
 
 (async () => {
-  const res = await fetch(SOURCE, { headers: { 'User-Agent': 'WeekenderMap/1.0 (+personal use)' } });
-  if (!res.ok) throw new Error(`Fetch failed: HTTP ${res.status}`);
-  const html = await res.text();
+  const html = await fetchWeekenderHtml(SOURCE);
+  if (!html) throw new Error('Fetch failed: unable to retrieve ParentMap Weekender page.');
 
   const events = parseWeekender(html, SOURCE);
   if (!events.length) {

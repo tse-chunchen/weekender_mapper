@@ -1,0 +1,35 @@
+# Free, no-server auto-refresh: runs the scraper on a schedule and commits events.json.
+# Runs every MONDAY (start-of-week refresh) and THURSDAY (when ParentMap typically
+# posts the new Weekender). Also runnable on demand from the Actions tab.
+#
+# Want Monday-only? Delete the Thursday cron line below — but note that on Mondays
+# the article usually still shows the weekend that just ended, so the map would lag
+# behind by a week until the next Monday run.
+name: Refresh events.json
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'   # 13:00 UTC Monday   (~6:00 AM Pacific)
+    - cron: '0 13 * * 4'   # 13:00 UTC Thursday (~6:00 AM Pacific)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run scrape
+      - name: Commit updated data
+        run: |
+          git config user.name  "weekender-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add events.json
+          git commit -m "Auto-refresh events.json" || echo "No changes to commit"
+          git push

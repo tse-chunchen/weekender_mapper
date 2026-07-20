@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weekender · Seattle-Area Family Fun Map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E5; --paper-2:#FBF8F0; --ink:#23271E; --ink-soft:#5C6152;
+    --forest:#234734; --forest-2:#2E5A41; --berry:#D9492F; --berry-deep:#B83A24;
+    --gold:#E2A33A; --line:#E2DAC7; --line-strong:#D2C8AE;
+    --shadow:0 1px 2px rgba(35,39,30,.06),0 8px 24px rgba(35,39,30,.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+  a{color:var(--berry-deep);}
+  .app{display:grid;grid-template-columns:380px 1fr;grid-template-rows:auto 1fr;
+    grid-template-areas:"head head" "side map";height:100vh;height:100dvh;overflow:hidden;}
+  header{grid-area:head;background:var(--forest);color:var(--paper-2);padding:14px 22px;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:3px solid var(--gold);}
+  .brand{display:flex;flex-direction:column;line-height:1;}
+  .kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px;}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:26px;margin:0;letter-spacing:.2px;}
+  .daterange{font-family:"Fraunces",serif;font-style:italic;font-weight:400;color:#CFE0D2;font-size:15px;margin-top:4px;}
+  .headright{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .src{font-size:12.5px;color:#C6D6C9;text-align:right;line-height:1.5;}
+  .src a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);}
+  .src a:hover{border-color:#fff;}
+  .fresh{display:flex;align-items:center;gap:9px;font-size:12px;color:#C6D6C9;}
+  .refresh{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font:inherit;
+    font-size:12px;font-weight:600;padding:5px 11px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .refresh:hover{background:rgba(255,255,255,.2);}
+  .refresh.spin .ic{animation:sp 1s linear infinite;display:inline-block;}
+  @keyframes sp{to{transform:rotate(360deg);}}
+
+  .side{grid-area:side;background:var(--paper-2);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;}
+  .filters{padding:16px 18px 14px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--paper-2));}
+  .filt-label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 8px;}
+  .search{width:100%;padding:9px 12px;border:1px solid var(--line-strong);border-radius:9px;font:inherit;font-size:14px;background:#fff;margin-bottom:14px;color:var(--ink);}
+  .search:focus{outline:none;border-color:var(--forest-2);box-shadow:0 0 0 3px rgba(46,90,65,.12);}
+  .seg{display:inline-flex;background:#EDE6D4;border-radius:9px;padding:3px;gap:2px;}
+  .seg button{border:0;background:transparent;font:inherit;font-weight:600;font-size:13px;color:var(--ink-soft);padding:6px 14px;border-radius:7px;cursor:pointer;transition:.15s;}
+  .seg button.on{background:var(--forest);color:#fff;box-shadow:var(--shadow);}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+  .chip{border:1px solid var(--line-strong);background:#fff;border-radius:999px;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink-soft);padding:5px 12px;cursor:pointer;transition:.15s;}
+  .chip.on{background:var(--berry);border-color:var(--berry);color:#fff;}
+  .chip:hover{border-color:var(--berry);}
+  .countbar{padding:10px 18px;font-size:12.5px;color:var(--ink-soft);border-bottom:1px solid var(--line);background:var(--paper);font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .reset{background:none;border:0;font:inherit;font-size:12px;font-weight:600;color:var(--berry-deep);cursor:pointer;text-decoration:underline;}
+  .list{overflow-y:auto;flex:1;min-height:0;padding:8px 10px 24px;}
+  .card{display:flex;gap:12px;padding:12px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.15s;margin-bottom:4px;}
+  .card:hover{background:#fff;border-color:var(--line);}
+  .card.active{background:#fff;border-color:var(--berry);box-shadow:var(--shadow);}
+  .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--forest);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;font-family:"Fraunces",serif;}
+  .card.active .num{background:var(--berry);}
+  .card.paid .num{box-shadow:inset 0 0 0 2px var(--gold);}
+  .ctitle{font-family:"Fraunces",serif;font-weight:600;font-size:15.5px;line-height:1.2;margin:1px 0 5px;}
+  .meta{font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px;}
+  .tag.free{background:#E2F0E4;color:#2C6740;}
+  .tag.paid{background:#FBEBD2;color:#9B6A12;}
+  .tag.region{background:#EDE6D4;color:#6B6750;}
+  .tag.approx{background:#F7DED7;color:#A93B22;}
+
+  .map{grid-area:map;position:relative;background:#dfe6df;}
+  #map{height:100%;width:100%;background:#dfe6df;}
+  .mk{position:relative;width:34px;height:44px;}
+  .mk-body{position:absolute;top:2px;left:2px;width:30px;height:30px;background:var(--forest);color:#fff;border:2px solid #fff;
+    border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 4px 10px rgba(35,39,30,.35);transition:transform .15s,background .15s;}
+  .mk-body span{display:block;transform:rotate(45deg);text-align:center;line-height:26px;font-family:"Fraunces",serif;font-weight:700;font-size:14px;}
+  .mk.paid .mk-body{box-shadow:0 4px 10px rgba(35,39,30,.35),inset 0 0 0 2px var(--gold);}
+  .mk.approx .mk-body{border-style:dashed;background:var(--forest-2);}
+  .mk.active .mk-body{background:var(--berry);transform:rotate(-45deg) scale(1.18);z-index:1000;}
+  .leaflet-popup-content-wrapper{border-radius:14px;box-shadow:var(--shadow);}
+  .leaflet-popup-content{margin:0;width:266px !important;}
+  .pop{padding:15px 16px 14px;font-family:"Hanken Grotesk",sans-serif;}
+  .pop-num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--berry);color:#fff;font-family:"Fraunces",serif;font-weight:700;font-size:13px;margin-right:8px;flex:none;}
+  .pop h3{font-family:"Fraunces",serif;font-weight:600;font-size:17px;margin:0 0 9px;line-height:1.18;display:flex;align-items:center;}
+  .pop-row{font-size:13px;margin:5px 0;display:flex;gap:7px;}
+  .pop-row b{color:var(--ink-soft);font-weight:700;min-width:50px;flex:none;}
+  .pop-approx{font-size:11.5px;color:#A93B22;background:#F7DED7;border-radius:7px;padding:6px 9px;margin:8px 0 4px;line-height:1.4;}
+  .pop-desc{font-size:12.7px;color:var(--ink-soft);line-height:1.5;margin:10px 0 12px;}
+  .pop a.btn{display:inline-block;background:var(--berry);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;}
+  .pop a.btn:hover{background:var(--berry-deep);}
+  .legend{position:absolute;bottom:14px;left:14px;z-index:600;background:rgba(251,248,240,.94);border:1px solid var(--line);
+    border-radius:10px;padding:9px 12px;font-size:11.5px;color:var(--ink-soft);box-shadow:var(--shadow);line-height:1.7;}
+  .legend b{color:var(--ink);}
+  .lg-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--forest);vertical-align:middle;margin-right:5px;}
+  .lg-dot.g{box-shadow:inset 0 0 0 2px var(--gold);}
+  .lg-dot.d{border:1.5px dashed var(--forest-2);background:transparent;}
+  .banner{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:900;max-width:90%;
+    border-radius:10px;padding:9px 14px;font-size:12.5px;box-shadow:var(--shadow);display:none;text-align:center;line-height:1.45;}
+  .banner.show{display:block;}
+  .banner.warn{background:#FBEBD2;color:#8a5a0c;border:1px solid #e8c98a;}
+  .banner.err{background:#F7DED7;color:#A93B22;border:1px solid #e6b3a6;}
+  .empty{padding:40px 24px;text-align:center;color:var(--ink-soft);font-size:14px;}
+  @media (max-width:760px){
+    .app{grid-template-columns:1fr;grid-template-rows:auto 44vh 1fr;grid-template-areas:"head" "map" "side";}
+    .side{border-right:0;border-top:1px solid var(--line);}
+    .src{display:none;} h1{font-size:21px;} .legend{font-size:10.5px;padding:7px 10px;}
+    .headright{flex-direction:row;align-items:center;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="kicker">ParentMap · The Weekender</div>
+      <h1>Seattle-Area Family Fun</h1>
+      <div class="daterange" id="subtitle">Editor’s picks for families</div>
+    </div>
+    <div class="headright">
+      <div class="src">Events curated by ParentMap.<br>
+        Source: <a href="https://www.parentmap.com/things-to-do/the-weekender/" target="_blank" rel="noopener">parentmap.com/the-weekender</a></div>
+      <div class="fresh">
+        <span id="updated">Loading…</span>
+        <button class="refresh" id="refresh"><span class="ic">↻</span> Refresh</button>
+      </div>
+    </div>
+  </header>
+  <aside class="side">
+    <div class="filters">
+      <input id="search" class="search" type="text" placeholder="Search events, places…" autocomplete="off">
+      <div class="filt-label">Cost</div>
+      <div class="seg" id="cost">
+        <button data-cost="all" class="on">All</button>
+        <button data-cost="free">Free</button>
+        <button data-cost="paid">Ticketed</button>
+      </div>
+      <div class="filt-label" style="margin-top:14px;">Region</div>
+      <div class="chips" id="regions"></div>
+    </div>
+    <div class="countbar"><span id="count">—</span><button class="reset" id="reset">Reset filters</button></div>
+    <div class="list" id="list"></div>
+  </aside>
+  <div class="map">
+    <div id="map"></div>
+    <div class="banner" id="banner"></div>
+    <div class="legend">
+      <div><span class="lg-dot"></span><b>Pin</b> = event location</div>
+      <div><span class="lg-dot g"></span>gold ring = ticketed</div>
+      <div><span class="lg-dot d"></span>dashed = approximate area</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+/* ============================================================
+   CONFIG
+   LIVE_ENDPOINT: set to your deployed serverless scraper (e.g. "/api/events")
+   to refresh from ParentMap on every launch. Leave "" to use the bundled
+   events.json (which a scheduled scraper / GitHub Action keeps up to date).
+   ============================================================ */
+const LIVE_ENDPOINT = ""; // e.g. "/api/events"
+
+if(typeof L==='undefined'){
+  document.querySelector('.map').innerHTML='<div class="empty" style="padding:60px 24px">The map library couldn’t load — check your internet connection and reload.</div>';
+  throw new Error('Leaflet failed to load');
+}
+
+const banner=document.getElementById('banner');
+function showBanner(msg,kind){ banner.textContent=msg; banner.className='banner show '+(kind||'warn'); }
+function hideBanner(){ banner.className='banner'; }
+
+/* ---------- map ---------- */
+const map=L.map('map',{scrollWheelZoom:true,zoomControl:true}).setView([47.45,-122.18],9);
+const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(map);
+let tileWarned=false;
+tiles.on('tileerror',()=>{ if(!tileWarned){tileWarned=true;
+  showBanner('Map tiles are blocked here. Open this page in your browser (not the preview) to see the street map. Pins and links work either way.','warn');} });
+function fixSize(){map.invalidateSize();}
+setTimeout(fixSize,200); window.addEventListener('load',fixSize); window.addEventListener('resize',fixSize);
+
+/* ---------- state ---------- */
+let EVENTS=[], REGIONS=[], markers={}, activeN=null;
+const state={cost:'all',regions:new Set(),q:''};
+
+function popupHTML(e){
+  const approx=e.approx?`<div class="pop-approx">📍 Approximate area — spans ${e.region==='Various'?'multiple statewide locations':'many spots across the region'}. Open the link for exact details.</div>`:'';
+  return `<div class="pop"><h3><span class="pop-num">${e.n}</span>${e.title}</h3>
+    <div class="pop-row"><b>When</b><span>${e.date}</span></div>
+    <div class="pop-row"><b>Cost</b><span>${e.cost}</span></div>
+    <div class="pop-row"><b>Where</b><span>${e.loc}</span></div>${approx}
+    <div class="pop-desc">${e.desc||''}</div>
+    <a class="btn" href="${e.url}" target="_blank" rel="noopener">View event details →</a></div>`;
+}
+function buildMarkers(){
+  Object.values(markers).forEach(m=>map.removeLayer(m)); markers={};
+  EVENTS.forEach(e=>{
+    const cls=`mk ${e.costType==='paid'?'paid':''} ${e.approx?'approx':''}`;
+    const icon=L.divIcon({className:'',html:`<div class="${cls}"><div class="mk-body"><span>${e.n}</span></div></div>`,iconSize:[34,44],iconAnchor:[17,42],popupAnchor:[0,-40]});
+    const m=L.marker([e.lat,e.lng],{icon}).addTo(map);
+    m.bindPopup(popupHTML(e),{maxWidth:300,minWidth:266});
+    m.on('click',()=>setActive(e.n,false));
+    markers[e.n]=m;
+  });
+}
+function buildRegions(){
+  const el=document.getElementById('regions'); el.innerHTML=''; state.regions.clear();
+  REGIONS.forEach(r=>{
+    const c=document.createElement('button');
+    c.className='chip'; c.textContent=r; c.dataset.region=r;
+    c.addEventListener('click',()=>{state.regions.has(r)?state.regions.delete(r):state.regions.add(r);c.classList.toggle('on');render();});
+    el.appendChild(c);
+  });
+}
+const listEl=document.getElementById('list'),countEl=document.getElementById('count');
+function visibleEvents(){return EVENTS.filter(e=>{
+  if(state.cost!=='all'&&e.costType!==state.cost)return false;
+  if(state.regions.size&&!state.regions.has(e.region))return false;
+  if(state.q&&!(e.title+' '+e.loc+' '+(e.desc||'')+' '+e.region).toLowerCase().includes(state.q))return false;
+  return true;});}
+function render(){
+  const vis=visibleEvents(),visN=new Set(vis.map(e=>e.n));
+  EVENTS.forEach(e=>{const on=map.hasLayer(markers[e.n]);
+    if(visN.has(e.n)&&!on)markers[e.n].addTo(map);
+    if(!visN.has(e.n)&&on)map.removeLayer(markers[e.n]);});
+  listEl.innerHTML='';
+  if(!vis.length)listEl.innerHTML='<div class="empty">No events match these filters.<br>Try resetting them.</div>';
+  vis.forEach(e=>{
+    const card=document.createElement('div');
+    card.className=`card ${e.costType}`;card.dataset.n=e.n;
+    card.innerHTML=`<div class="num">${e.n}</div><div>
+      <div class="ctitle">${e.title}</div>
+      <div class="meta">${e.date} · ${e.loc}</div>
+      <div class="tags"><span class="tag ${e.costType}">${e.costType==='free'?'Free':'Ticketed'}</span>
+        <span class="tag region">${e.region}</span>${e.approx?'<span class="tag approx">Approx. location</span>':''}</div></div>`;
+    card.addEventListener('click',()=>setActive(e.n,true));
+    listEl.appendChild(card);
+  });
+  countEl.textContent=`Showing ${vis.length} of ${EVENTS.length} events`;
+}
+function setActive(n,fly){
+  activeN=n;
+  Object.entries(markers).forEach(([k,m])=>{if(m._icon){const w=m._icon.querySelector('.mk');if(w)w.classList.toggle('active',+k===n);}});
+  document.querySelectorAll('.card').forEach(c=>c.classList.toggle('active',+c.dataset.n===n));
+  const card=document.querySelector(`.card[data-n="${n}"]`); if(card)card.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const e=EVENTS.find(x=>x.n===n); if(!e)return;
+  if(fly){map.flyTo([e.lat,e.lng],Math.max(map.getZoom(),11),{duration:.6});setTimeout(()=>markers[n].openPopup(),360);
+    if(window.matchMedia('(max-width:760px)').matches)document.querySelector('.map').scrollIntoView({behavior:'smooth',block:'start'});}
+  else{markers[n].openPopup();}
+}
+
+/* ---------- controls (bound once) ---------- */
+document.getElementById('cost').addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;
+  state.cost=b.dataset.cost;document.querySelectorAll('#cost button').forEach(x=>x.classList.toggle('on',x===b));render();});
+document.getElementById('search').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();render();});
+document.getElementById('reset').addEventListener('click',()=>{state.cost='all';state.regions.clear();state.q='';
+  document.getElementById('search').value='';
+  document.querySelectorAll('#cost button').forEach(x=>x.classList.toggle('on',x.dataset.cost==='all'));
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));render();});
+document.getElementById('refresh').addEventListener('click',()=>load(true));
+
+/* ---------- data loading ---------- */
+function setFresh(updated){
+  const el=document.getElementById('updated');
+  if(!updated){el.textContent='';return;}
+  const d=new Date(updated);
+  el.textContent='Updated '+d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+' '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+}
+async function fetchData(){
+  const bust='?t='+Date.now();
+  if(LIVE_ENDPOINT){
+    try{ const r=await fetch(LIVE_ENDPOINT+bust); if(r.ok){const d=await r.json(); if(d&&d.events&&d.events.length){hideBanner();return d;}} }
+    catch(e){ /* fall through to bundled file */ }
+    showBanner('Live refresh unavailable — showing the last saved events.','warn');
+  }
+  const r=await fetch('./events.json'+bust);
+  if(!r.ok) throw new Error('events.json HTTP '+r.status);
+  return await r.json();
+}
+async function load(isManual){
+  const btn=document.getElementById('refresh'); btn.classList.add('spin');
+  try{
+    const data=await fetchData();
+    EVENTS=(data.events||[]).map(e=>({...e,approx:!!e.approx}));
+    REGIONS=[...new Set(EVENTS.map(e=>e.region))];
+    buildMarkers(); buildRegions(); render(); setFresh(data.updated);
+    if(data.title) document.getElementById('subtitle').textContent=data.title;
+    if(isManual && !LIVE_ENDPOINT) showBanner('Reloaded the saved events. (Live scraping needs the serverless endpoint — see README.)','warn');
+  }catch(err){
+    showBanner('Couldn’t load events.json. This page must be served over http(s) — host it rather than opening the file directly. ('+err.message+')','err');
+    document.getElementById('list').innerHTML='<div class="empty">No data loaded.<br>See the message on the map.</div>';
+  }finally{ btn.classList.remove('spin'); }
+}
+load(false);
+</script>
+</body>
+</html>

@@ -1,48 +1,17 @@
 {
-  "updated": "2026-07-21T04:48:31.467Z",
+  "updated": "2026-07-19T17:00:00.000Z",
   "source": "https://www.parentmap.com/things-to-do/the-weekender/",
+  "title": "Editor’s picks · the weekend of July 17–19",
   "events": [
-    {
-      "n": 1,
-      "title": "Take a Spin at LeMay",
-      "date": "Friday, July 17",
-      "cost": "Included with admission ($17.50–$24.50) or membership",
-      "costType": "paid",
-      "region": "South Sound",
-      "loc": "LeMay – America’s Car Museum, 2702 E. D St., Tacoma If you’ve ever visited LeMay, you’ve likely daydreamed about taking a spin in one of the cars from the museum’s collections. That dream can become a reality this weekend, with a spin around Haub Family Field. Make a day of it wandering the museum exhibits, and plan for lunch at the new café.",
-      "lat": 47.2357021,
-      "lng": -122.4303289,
-      "approx": false,
-      "url": "https://www.parentmap.com/calendar/take-a-spin-at-lemay/",
-      "desc": ""
-    },
-    {
-      "n": 2,
-      "title": "Family Fun Day at Highline SeaTac Botanical Garden",
-      "date": "Saturday, July 18",
-      "cost": "Free",
-      "costType": "free",
-      "region": "Seattle Area",
-      "loc": "Highline SeaTac Botanical Garden, 13735 24th Ave. S., SeaTac What kid wouldn’t be amazed by seeing someone walk by on stilts? This garden fest will not only have stilt walking, but also live music and more entertainment for families. Try out yoga in the garden, watch special demonstrations, and learn about pollinators and their favorite plants.",
-      "lat": 47.4795849,
-      "lng": -122.3037382,
-      "approx": false,
-      "url": "https://www.parentmap.com/calendar/family-fun-day-highline-seatac-botanical-garden/",
-      "desc": ""
-    },
-    {
-      "n": 3,
-      "title": "Parade of Nations and Watch Party",
-      "date": "Sunday, July 19",
-      "cost": "Free",
-      "costType": "free",
-      "region": "Seattle Area",
-      "loc": "Rainier Playfields, 3700 S. Alaska St., Seattle The thrilling World Cup comes to an end this weekend with a final match at noon on Sunday. Celebrate beforehand with a parade that highlights diversity and unity across cultures. There will also be soccer-themed activities and more. Plan for lunch from a food truck!",
-      "lat": 47.561706,
-      "lng": -122.286303,
-      "approx": false,
-      "url": "https://www.parentmap.com/calendar/parade-of-nations-and-watch-party/",
-      "desc": "More weekend activities Play tourist for a day and visit the top six attractions on the Seattle Waterfront. Soak up the sun and then cool off in an epic outdoor pool. Let the kids stay up past bedtime for a nostalgic night out at a drive-in movie theater. Our family fun calendar features great community events — every day of the year!"
-    }
+    { "n": 1, "title": "Take a Spin at LeMay", "date": "Friday, July 17", "cost": "Included with admission ($17.50–$24.50) or membership", "costType": "paid", "region": "South Sound", "loc": "LeMay – America’s Car Museum · 2702 E. D St., Tacoma", "lat": 47.2357021, "lng": -122.4303289, "approx": false, "url": "https://www.parentmap.com/calendar/take-a-spin-at-lemay/", "desc": "Ride along in a classic car from the museum’s collection on a spin around Haub Family Field, then make a day of the exhibits and grab lunch at the new café." },
+    { "n": 2, "title": "Fircrest Fun Days", "date": "Fri–Sat, July 17–18", "cost": "Free", "costType": "free", "region": "South Sound", "loc": "Fircrest Park · 555 Contra Costa Ave., Fircrest", "lat": 47.2338927, "lng": -122.5127218, "approx": false, "url": "https://www.parentmap.com/series/46697-series-415985/", "desc": "An Old West–themed festival with live concerts, artist and vendor booths, food trucks, bake-offs, a Kidz Zone with story time and face painting — and Saturday fireworks." },
+    { "n": 3, "title": "GeekFest West", "date": "Fri–Sun, July 17–19", "cost": "$5–$35", "costType": "paid", "region": "North Sound", "loc": "Lynnwood Event Center · 3711 196th St., Lynnwood", "lat": 47.8213778, "lng": -122.2834694, "approx": false, "url": "https://www.parentmap.com/series/geekfest-west-series-425492/", "desc": "Snohomish County’s biggest geek gathering: cosplay, LARPing, chess, video games and pinball, with Sunday geared to families — kids’ cosplay demos, tournaments and tutorials." },
+    { "n": 4, "title": "Kla Ha Ya Days", "date": "Fri–Sun, July 17–19", "cost": "Free", "costType": "free", "region": "North Sound", "loc": "Historic Downtown Snohomish · 1024 First St., Snohomish", "lat": 47.9115981, "lng": -122.095657, "approx": false, "url": "https://www.parentmap.com/series/kla-ha-ya-days-series-422043/", "desc": "A century-old summer tradition in downtown Snohomish: a kids fair and outdoor movie Friday, pancake breakfast, street fair, parade and circus acts Saturday, and a Sunday car show." },
+    { "n": 5, "title": "Family Fun Day at Highline SeaTac Botanical Garden", "date": "Saturday, July 18", "cost": "Free", "costType": "free", "region": "Seattle Area", "loc": "Highline SeaTac Botanical Garden · 13735 24th Ave. S., SeaTac", "lat": 47.4795849, "lng": -122.3037382, "approx": false, "url": "https://www.parentmap.com/calendar/family-fun-day-highline-seatac-botanical-garden/", "desc": "Stilt walkers, live music, garden yoga, demonstrations and pollinator lessons make this garden festival an easy, free win with kids." },
+    { "n": 6, "title": "Lavender Festival", "date": "Sat–Sun, July 18–19", "cost": "$9", "costType": "paid", "region": "Eastside", "loc": "JB Family Growers · 14063 N.E. 145th St., Woodinville", "lat": 47.7325957, "lng": -122.1494897, "approx": false, "url": "https://www.parentmap.com/series/lavender-festival/", "desc": "Fields of 15,000 lavender plants in full bloom (with sunflowers starting too) — walk the rows, sip lavender lemonade and shop local vendors." },
+    { "n": 7, "title": "SandBlast Festival of the Arts", "date": "Sat–Sun, July 18–19", "cost": "Free", "costType": "free", "region": "Eastside", "loc": "McCormick Park · 26200 N.E. Stephens St., Duvall", "lat": 47.7398874, "lng": -121.9901084, "approx": false, "url": "https://www.parentmap.com/series/26433-series-410876/", "desc": "Watch artists carve remarkable sand sculptures on the riverside beach over two days, with local artwork and live music alongside." },
+    { "n": 8, "title": "Downtown Seattle Block Party", "date": "Sat–Sun, July 18–19", "cost": "Free", "costType": "free", "region": "Seattle Area", "loc": "Westlake Park · 401 Pine St., Seattle", "lat": 47.6109571, "lng": -122.3370147, "approx": false, "url": "https://www.parentmap.com/series/downtown-seattle-block-party-2/", "desc": "A kickoff party for the Nordstrom Anniversary Sale with kid-friendly activities, games and live entertainment — plus appearances by the Mariner Moose and Blitz the Seahawk." },
+    { "n": 9, "title": "Seattle Bon Odori Festival", "date": "Sat–Sun, July 18–19", "cost": "Free", "costType": "free", "region": "Seattle Area", "loc": "Seattle Betsuin Buddhist Temple · 1427 S. Main St., Seattle", "lat": 47.5997302, "lng": -122.3132184, "approx": false, "url": "https://www.parentmap.com/series/seattle-bon-odori-festival/", "desc": "Taiko drumming, Japanese folk dancing, festival foods (shaved ice!), a thrift store and a beer garden at this beloved summer celebration honoring ancestral spirits." },
+    { "n": 10, "title": "Parade of Nations and Watch Party", "date": "Sunday, July 19", "cost": "Free", "costType": "free", "region": "Seattle Area", "loc": "Rainier Playfield · 3700 S. Alaska St., Seattle", "lat": 47.561706, "lng": -122.286303, "approx": false, "url": "https://www.parentmap.com/calendar/parade-of-nations-and-watch-party/", "desc": "Celebrate the World Cup final (kickoff at noon Sunday) with a parade celebrating diversity and unity, soccer-themed activities and food trucks." }
   ]
 }

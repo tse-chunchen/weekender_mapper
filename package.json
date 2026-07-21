@@ -1,15 +1,14 @@
 {
   "name": "weekender-map",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Interactive map of ParentMap's Weekender family events, with an auto-scraper.",
   "type": "commonjs",
   "scripts": {
-    "scrape": "node scrape.js"
+    "scrape": "node scrape.js",
+    "test": "node test/run-tests.js"
   },
-  "dependencies": {
-    "cheerio": "^1.0.0"
-  },
+  "dependencies": {},
   "engines": {
     "node": ">=18"
   }

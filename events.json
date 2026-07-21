@@ -1,0 +1,48 @@
+{
+  "updated": "2026-07-21T04:48:31.467Z",
+  "source": "https://www.parentmap.com/things-to-do/the-weekender/",
+  "events": [
+    {
+      "n": 1,
+      "title": "Take a Spin at LeMay",
+      "date": "Friday, July 17",
+      "cost": "Included with admission ($17.50–$24.50) or membership",
+      "costType": "paid",
+      "region": "South Sound",
+      "loc": "LeMay – America’s Car Museum, 2702 E. D St., Tacoma If you’ve ever visited LeMay, you’ve likely daydreamed about taking a spin in one of the cars from the museum’s collections. That dream can become a reality this weekend, with a spin around Haub Family Field. Make a day of it wandering the museum exhibits, and plan for lunch at the new café.",
+      "lat": 47.2357021,
+      "lng": -122.4303289,
+      "approx": false,
+      "url": "https://www.parentmap.com/calendar/take-a-spin-at-lemay/",
+      "desc": ""
+    },
+    {
+      "n": 2,
+      "title": "Family Fun Day at Highline SeaTac Botanical Garden",
+      "date": "Saturday, July 18",
+      "cost": "Free",
+      "costType": "free",
+      "region": "Seattle Area",
+      "loc": "Highline SeaTac Botanical Garden, 13735 24th Ave. S., SeaTac What kid wouldn’t be amazed by seeing someone walk by on stilts? This garden fest will not only have stilt walking, but also live music and more entertainment for families. Try out yoga in the garden, watch special demonstrations, and learn about pollinators and their favorite plants.",
+      "lat": 47.4795849,
+      "lng": -122.3037382,
+      "approx": false,
+      "url": "https://www.parentmap.com/calendar/family-fun-day-highline-seatac-botanical-garden/",
+      "desc": ""
+    },
+    {
+      "n": 3,
+      "title": "Parade of Nations and Watch Party",
+      "date": "Sunday, July 19",
+      "cost": "Free",
+      "costType": "free",
+      "region": "Seattle Area",
+      "loc": "Rainier Playfields, 3700 S. Alaska St., Seattle The thrilling World Cup comes to an end this weekend with a final match at noon on Sunday. Celebrate beforehand with a parade that highlights diversity and unity across cultures. There will also be soccer-themed activities and more. Plan for lunch from a food truck!",
+      "lat": 47.561706,
+      "lng": -122.286303,
+      "approx": false,
+      "url": "https://www.parentmap.com/calendar/parade-of-nations-and-watch-party/",
+      "desc": "More weekend activities Play tourist for a day and visit the top six attractions on the Seattle Waterfront. Soak up the sun and then cool off in an epic outdoor pool. Let the kids stay up past bedtime for a nostalgic night out at a drive-in movie theater. Our family fun calendar features great community events — every day of the year!"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T20:23:45.678Z",
+  "updated": "2026-11-09T22:46:26.850Z",
   "source": "https://www.parentmap.com/things-to-do/the-weekender/",
   "events": [
     {
@@ -9,10 +9,10 @@
       "cost": "Free",
       "costType": "free",
       "region": "Seattle Area",
-      "loc": "Burien Community Center , 14700 6th Ave. S.W., Burien",
-      "lat": 47.6,
-      "lng": -122.33,
-      "approx": true,
+      "loc": "Burien Community Center , 14700 Sixth Ave. S.W., Burien",
+      "lat": 47.4710094,
+      "lng": -122.3414057,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/dia-de-los-muertos-day-dead-celebration-0",
       "desc": "Ofrendas, crafts, food, music and a chance to honor your ancestors is what this celebration is all about. Join in the free, early evening festival, open to everyone."
     },
@@ -37,12 +37,12 @@
       "cost": "Included with admission ($25.45–$39.95)",
       "costType": "paid",
       "region": "Seattle Area",
-      "loc": "Museum of Pop Culture , 325 5th Ave. N., Seattle",
-      "lat": 47.6,
-      "lng": -122.33,
-      "approx": true,
+      "loc": "Museum of Pop Culture , 325 Fifth Ave. N., Seattle",
+      "lat": 47.6214824,
+      "lng": -122.3481245,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/hip-hop-history-month-celebration-at-mopop",
-      "desc": "Head to MOPOP for a kid-friendly music and fashion mash up highlighting the history of hip-hop. Listening sessions, a fashion showcase, and intricate nail design will be part of the day, as will a community clothing drive to support families in need."
+      "desc": "Head to MOPOP for a kid-friendly music and fashion mash-up highlighting the history of hip-hop. Listening sessions, a fashion showcase, and intricate nail design will be part of the day, as will a community clothing drive to support families in need."
     },
     {
       "n": 4,
@@ -51,12 +51,12 @@
       "cost": "Free",
       "costType": "free",
       "region": "Eastside",
-      "loc": "Farrel McWhirter Park , 19545 N.E. Redmond Rd., Redmond",
-      "lat": 47.62,
-      "lng": -122.12,
-      "approx": true,
+      "loc": "Farrel-McWhirter Park , 19545 N.E. Redmond Rd., Redmond",
+      "lat": 47.6924387,
+      "lng": -122.0790468,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/pumpkin-drop/2026-11-07",
-      "desc": "Now that Halloween is over, bring your pristine pumpkins to Farrel McWhirter Farm for the animals to enjoy. Then watch it get smashed for the animals to enjoy at 12:30 p.m."
+      "desc": "Now that Halloween is over, bring your pristine pumpkins to Farrel-McWhirter Park. Watch the pumpkins get smashed for the animals to enjoy at 12:30 p.m."
     },
     {
       "n": 5,
@@ -66,9 +66,9 @@
       "costType": "free",
       "region": "Seattle Area",
       "loc": "Aurora Community Nazarene Church , 1900 N. 175th St., Shoreline",
-      "lat": 47.6,
-      "lng": -122.33,
-      "approx": true,
+      "lat": 47.7562306,
+      "lng": -122.3362218,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/seattle-festival-orchestra-sabre-dance",
       "desc": "Why go to a boring old petting zoo when you can bring your kids to an instrument “petting zoo.” It’s a chance for kids to play with real instruments after being inspired by them at this free concert just for families — one of three this year!"
     },
@@ -84,7 +84,7 @@
       "lng": -122.15,
       "approx": true,
       "url": "https://www.parentmap.com/calendar/60th-annual-veterans-day-parade-observance",
-      "desc": "Get your marching band fix (more than 10 are scheduled to perform!) during Auburn’s annual Veterans Day Parade. Four thousand parade participants, plus plenty of military vehicles to fascinate your kids makes this an easy pick. Activities run all day. The parade starts at 11 a.m."
+      "desc": "Get your marching band fix (more than 10 are scheduled to perform!) during Auburn’s annual Veterans Day Parade. Four thousand parade participants, plus plenty of military vehicles to fascinate your kids, makes this an easy pick. Activities run all day. The parade starts at 11 a.m."
     },
     {
       "n": 7,
@@ -93,10 +93,10 @@
       "cost": "$5 per person",
       "costType": "paid",
       "region": "Seattle Area",
-      "loc": "McGilvra Elementary School , 1617 38th Ave. East, Seattle",
-      "lat": 47.6,
-      "lng": -122.33,
-      "approx": true,
+      "loc": "McGilvra Elementary School , 1617 38th Ave. E., Seattle",
+      "lat": 47.633989,
+      "lng": -122.28482,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/little-beats-concert-series/2026-11-07",
       "desc": "Get in harmony with the all-female Highlight Quartet at this popular family concert series in the city. It’s sure to hit the right note with your music-loving crew."
     },
@@ -107,7 +107,7 @@
       "cost": "Free",
       "costType": "free",
       "region": "Seattle Area",
-      "loc": "Children’s Museum of Skagit County, 432 Fashion Way, Burlington",
+      "loc": "Children’s Museum of Skagit County , 432 Fashion Way, Burlington",
       "lat": 47.6,
       "lng": -122.33,
       "approx": true,
@@ -122,9 +122,9 @@
       "costType": "paid",
       "region": "Seattle Area",
       "loc": "Seattle Center Exhibition Hall , 301 Mercer St., Seattle",
-      "lat": 47.6,
-      "lng": -122.33,
-      "approx": true,
+      "lat": 47.6240707,
+      "lng": -122.3514785,
+      "approx": false,
       "url": "https://www.parentmap.com/calendar/sea-meow-convention-2025/2026-11-07",
       "desc": "Calling all cat lovers! I’ve got the purr-fect activity to fill your weekend: A convention featuring more than 100 “meowchants,” cosplay, cat calling, and fab feline stars like Hannah Shaw, the Kitten Lady (Saturday) and Jackson Galaxy (Sunday)."
     },
@@ -140,7 +140,7 @@
       "lng": -122.15,
       "approx": true,
       "url": "https://www.parentmap.com/calendar/47854",
-      "desc": "Catch the salmon running in Olympia this weekend. While you’re there, stay warm with apple cider and fresh apple cider donuts. Hands-on activities are also part of the plan."
+      "desc": "Catch the salmon running in Olympia this weekend. While you’re there, stay warm with hot apple cider and fresh apple cider doughnuts. Hands-on activities are also part of the plan."
     }
   ]
 }
